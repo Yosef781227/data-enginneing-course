@@ -1,0 +1,34 @@
+{
+  "v": 3,
+  "createdOnFiles": {"v": 1, "at": "2026-11-05T12:00:00Z"},
+  "title": "DE Lab",
+  "launch": {"view": "canvas"},
+  "pages": [],
+  "boards": {
+    "Main.dc.html": {"x": 0, "y": 0, "w": 1440, "h": 1120, "title": "Today (home)", "expand": "fill", "is_interactive": true},
+    "Labs.dc.html": {"x": 1520, "y": 0, "w": 1440, "h": 1180, "title": "Labs map", "expand": "fill", "is_interactive": true},
+    "LabStep.dc.html": {"x": 3040, "y": 0, "w": 1440, "h": 1320, "title": "Lab step (focus mode)", "expand": "fill", "is_interactive": true},
+    "Practice.dc.html": {"x": 0, "y": 1760, "w": 1440, "h": 1180, "title": "Practice hub", "expand": "fill", "is_interactive": true},
+    "Question.dc.html": {"x": 1520, "y": 1760, "w": 1440, "h": 1420, "title": "Practice question, answered", "expand": "fill", "is_interactive": true},
+    "Progress.dc.html": {"x": 3040, "y": 1760, "w": 1440, "h": 1240, "title": "Progress", "expand": "fill", "is_interactive": true},
+    "MockStart.dc.html": {"x": 0, "y": 3700, "w": 1440, "h": 1000, "title": "Mock exam: start", "expand": "fill", "is_interactive": true},
+    "MockExam.dc.html": {"x": 1520, "y": 3700, "w": 1440, "h": 900, "title": "Mock exam: in progress", "expand": "fill", "is_interactive": true},
+    "MockResults.dc.html": {"x": 3040, "y": 3700, "w": 1440, "h": 1120, "title": "Mock exam: results", "expand": "fill", "is_interactive": true},
+    "StyleGuide.dc.html": {"x": 0, "y": 5320, "w": 1440, "h": 1480, "title": "Style guide"},
+    "Sidebar.dc.html": {"x": 1520, "y": 5320, "w": 248, "h": 760, "title": "Sidebar (shared component)", "is_interactive": true}
+  },
+  "order": [
+    "Main.dc.html", "Labs.dc.html", "LabStep.dc.html",
+    "Practice.dc.html", "Question.dc.html", "Progress.dc.html",
+    "MockStart.dc.html", "MockExam.dc.html", "MockResults.dc.html",
+    "StyleGuide.dc.html", "Sidebar.dc.html"
+  ],
+  "notes": {
+    "row1": {"x": 0, "y": -320, "text": "1 · Learn: home → labs → a lab step", "kind": "title1", "maxW": 4480},
+    "row2": {"x": 0, "y": 1440, "text": "2 · Practice questions and progress", "kind": "title1", "maxW": 4480},
+    "row3": {"x": 0, "y": 3380, "text": "3 · Mock exam", "kind": "title1", "maxW": 4480},
+    "row4": {"x": 0, "y": 5000, "text": "4 · Style guide and shared parts", "kind": "title1", "maxW": 4480},
+    "flow": {"x": -520, "y": 0, "w": 420, "text": "How it fits together\n\n• Every screen answers one question: what do I do next? The big blue button is always the next step.\n• Labs and practice share one sidebar, one colour language and one progress model (steps + questions → readiness).\n• Lab steps, practice sessions and the mock exam open in focus mode: no sidebar, a top bar with a way back.\n• Green = done. Blue = do this now. Orange = rewards and streaks. Amber = be careful (doubtful source).\n• Press Play on any screen to click through.", "fill": "blue", "size": "m"}
+  },
+  "designSystems": []
+}

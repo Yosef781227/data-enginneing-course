@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ingestion Cheat Sheet</title>
+<style>
+  :root {
+    --ink: #1a1d23; --muted: #5a6170; --line: #d5d9e0; --soft: #f3f5f8;
+    --c1: #1f5fbf; --c2: #b3541e; --c3: #2e7d4f; --warn: #a3261f;
+  }
+  @page { size: A4; margin: 12mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 16px; background: #fff; color: var(--ink);
+         font: 10.5pt/1.4 -apple-system, "Helvetica Neue", Arial, sans-serif; }
+  .page { max-width: 190mm; margin: 0 auto; }
+  h1 { font-size: 17pt; margin: 0 0 2px; }
+  .sub { color: var(--muted); margin: 0 0 12px; font-size: 9.5pt; }
+  h2 { font-size: 12pt; margin: 14px 0 6px; padding-bottom: 3px; border-bottom: 2px solid var(--ink); }
+  table { width: 100%; border-collapse: collapse; font-size: 9.5pt; }
+  th, td { border: 1px solid var(--line); padding: 5px 6px; vertical-align: top; text-align: left; }
+  thead th { background: var(--soft); }
+  th.rf { color: var(--c1); } th.ci { color: var(--c2); } th.al { color: var(--c3); }
+  tbody th { width: 17%; background: var(--soft); font-weight: 600; }
+  code, pre { font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 8.6pt; }
+  code { background: var(--soft); padding: 0 3px; border-radius: 3px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .card.wide { grid-column: 1 / -1; }
+  .card.wide .inner { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .card { border: 1px solid var(--line); border-radius: 6px; padding: 7px 8px; break-inside: avoid; }
+  .card h3 { margin: 0 0 4px; font-size: 10.5pt; }
+  .card.rf h3 { color: var(--c1); } .card.ci h3 { color: var(--c2); } .card.al h3 { color: var(--c3); }
+  .card pre { margin: 4px 0 0; padding: 6px; background: var(--soft); border-radius: 4px; white-space: pre; overflow: hidden; }
+  .card p { margin: 0 0 4px; font-size: 9pt; color: var(--muted); }
+  ul { margin: 0; padding-left: 16px; } li { margin: 2px 0; }
+  .traps li::marker { content: "⚠ "; color: var(--warn); }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .decide td:first-child { width: 58%; }
+  .foot { margin-top: 10px; font-size: 8.5pt; color: var(--muted); }
+  @media (max-width: 700px) { .grid, .two, .card.wide .inner { grid-template-columns: 1fr; } body { padding: 16px; } }
+  @media print { body { padding: 0; } h2 { break-after: avoid; } }
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>read_files() vs COPY INTO vs Auto Loader</h1>
+  <p class="sub">Databricks Data Engineer Associate · Course 1 “Data Ingestion with Lakeflow Connect”, slides 29–40 · notebooks 02A, 02B, A2</p>
+
+  <h2>Big idea first</h2>
+  <ul>
+    <li><b>read_files()</b> is a <b>function</b> that reads files into a table shape. It does <b>not</b> remember anything by itself.
+      With <code>CREATE TABLE … AS SELECT</code> it is <b>batch</b> (rereads all files). With <code>FROM STREAM read_files(…)</code> it becomes <b>Auto Loader</b>.</li>
+    <li><b>COPY INTO</b> is a <b>SQL command</b> for <b>incremental batch</b>: it remembers which files it loaded and skips them (<b>idempotent</b>). The course calls it <i>legacy</i>.</li>
+    <li><b>Auto Loader</b> (<code>cloudFiles</code>) is <b>incremental batch or streaming</b>, built on <b>Structured Streaming</b>. A <b>checkpoint</b> remembers processed files. Scales to millions of files.</li>
+  </ul>
+
+  <h2>Side-by-side</h2>
+  <table>
+    <thead><tr><th></th><th class="rf">CTAS + read_files() / spark.read</th><th class="ci">COPY INTO</th><th class="al">Auto Loader</th></tr></thead>
+    <tbody>
+      <tr><th>Ingestion type</th><td>Batch: reads <b>all</b> files every run</td><td>Incremental batch: only <b>new</b> files</td><td>Incremental batch <b>or</b> streaming</td></tr>
+      <tr><th>Best for</th><td>Small data, one-time / ad-hoc loads</td><td>Thousands of files, scheduled loads</td><td>Millions of files per hour, near real-time, billions for backfill</td></tr>
+      <tr><th>Interface</th><td>SQL (CTAS) · Python <code>spark.read</code></td><td>SQL only</td><td>Python <code>spark.readStream.format("cloudFiles")</code> · SQL streaming tables / pipelines (<code>STREAM read_files</code>)</td></tr>
+      <tr><th>Remembers loaded files?</th><td>No</td><td>Yes, in the target table’s metadata</td><td>Yes, in the <b>checkpoint</b></td></tr>
+      <tr><th>Idempotent (run twice = no duplicates)?</th><td><b>No</b></td><td><b>Yes</b> · <code>'force'='true'</code> reloads anyway</td><td><b>Yes</b> (exactly-once per file)</td></tr>
+      <tr><th>Schema</th><td>Inferred or given with <code>schema =&gt;</code></td><td>Evolve with <code>COPY_OPTIONS ('mergeSchema'='true')</code></td><td>Automatic inference + evolution; stored at <code>cloudFiles.schemaLocation</code></td></tr>
+      <tr><th>Bad / mismatched data</th><td><code>_rescued_data</code> column (on by default)</td><td>Error on schema mismatch unless mergeSchema</td><td><code>_rescued_data</code> column</td></tr>
+      <tr><th>Latency</th><td>High</td><td>Moderate (scheduled)</td><td>Low or high, depending on trigger</td></tr>
+      <tr><th>Ease of use</th><td>Simple</td><td>Simple, SQL-based</td><td>Intermediate → advanced</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Syntax to recognize</h2>
+  <div class="grid">
+    <div class="card rf"><h3>CTAS + read_files()</h3>
+      <p>Batch. Delta table by default.</p>
+<pre>CREATE TABLE users_bronze AS
+SELECT *,
+  _metadata.file_name AS source_file
+FROM read_files(
+  '/Volumes/cat/sch/raw/users',
+  format => 'csv',
+  header => true, sep => '|',
+  schema => 'id INT, email STRING',
+  rescueddatacolumn => '_rescued_data');</pre>
+      <p style="margin-top:4px">Quick look: <code>SELECT * FROM csv.`/Volumes/…`</code></p>
+    </div>
+    <div class="card ci"><h3>COPY INTO</h3>
+      <p>Target can be empty and have no schema.</p>
+<pre>CREATE TABLE IF NOT EXISTS users_bronze;
+
+COPY INTO users_bronze
+FROM '/Volumes/cat/sch/raw/users'
+FILEFORMAT = CSV
+FORMAT_OPTIONS ('header' = 'true',
+                'sep' = '|')
+COPY_OPTIONS ('mergeSchema' = 'true');</pre>
+      <p style="margin-top:4px"><b>FORMAT_OPTIONS</b> = how to <i>parse</i>. <b>COPY_OPTIONS</b> = how COPY INTO <i>behaves</i> (mergeSchema, force).</p>
+    </div>
+    <div class="card al wide"><h3>Auto Loader</h3>
+      <div class="inner">
+        <div><p>Python (<code>cloudFiles</code> = Auto Loader):</p>
+<pre>(spark.readStream
+   .format("cloudFiles")
+   .option("cloudFiles.format", "json")
+   .option("cloudFiles.schemaLocation", chk)
+   .load("/Volumes/cat/sch/raw/events")
+ .writeStream
+   .option("checkpointLocation", chk)
+   .trigger(availableNow=True)
+   .toTable("events_bronze"))</pre></div>
+        <div><p>SQL (streaming table — <code>STREAM</code> = Auto Loader):</p>
+<pre>CREATE OR REFRESH STREAMING TABLE events_bronze
+SCHEDULE EVERY 1 HOUR      -- optional
+AS SELECT *
+FROM STREAM read_files(
+  '/Volumes/cat/sch/raw/events',
+  format => 'json');
+
+REFRESH STREAMING TABLE events_bronze;</pre></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="two">
+    <div>
+      <h2>Which one? (exam keywords)</h2>
+      <table class="decide">
+        <tr><td>“one-time”, “ad-hoc”, “small dataset”, “explore files”</td><td><b>CTAS + read_files</b></td></tr>
+        <tr><td>“SQL only”, “thousands of files”, “idempotent”, “skip loaded files”, “retriable”</td><td><b>COPY INTO</b></td></tr>
+        <tr><td>“millions of files”, “near real-time”, “streaming”, “schema drift / new columns appear”</td><td><b>Auto Loader</b></td></tr>
+        <tr><td>“streaming table in Databricks SQL / pipeline”</td><td><b>STREAM read_files</b> (= Auto Loader)</td></tr>
+      </table>
+    </div>
+    <div>
+      <h2>Exam traps</h2>
+      <ul class="traps">
+        <li>Running CTAS + read_files again rereads <b>everything</b>. It is not incremental.</li>
+        <li>COPY INTO run twice adds <b>0</b> rows the second time, unless <code>'force'='true'</code>.</li>
+        <li>New columns in COPY INTO → <code>mergeSchema</code> goes in <b>COPY_OPTIONS</b>.</li>
+        <li><code>format("cloudFiles")</code> = Auto Loader. <code>cloudFiles.format</code> = the file type.</li>
+        <li>In SQL, the <b>STREAM</b> keyword is what turns read_files into Auto Loader.</li>
+        <li>Auto Loader needs a <b>checkpoint</b> (and a schemaLocation for inference).</li>
+        <li><code>trigger(availableNow=True)</code> = process all new files, then stop (incremental batch). <code>processingTime</code> = keep running.</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="foot">Ingestion methods (slides 18–20): <b>Batch</b> = CTAS, spark.read · <b>Incremental batch</b> = COPY INTO, Auto Loader with a timed trigger, CREATE OR REFRESH STREAMING TABLE · <b>Streaming</b> = Auto Loader with a continuous trigger, pipelines in continuous mode.<br>
+  Practise: <code>notebooks/lab1_ingestion.ipynb</code> exercises 1b (CTAS), 1c (COPY INTO), 1d (Auto Loader idea).</p>
+</div>
+</body>
+</html>

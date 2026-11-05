@@ -1,0 +1,25 @@
+.venv/
+.lab_warehouse/
+.lab_checkpoints/
+.lab_landing/
+.lab_state/
+.lab_external/
+spark-warehouse/
+metastore_db/
+derby.log
+__pycache__/
+.ipynb_checkpoints/
+scripts/ocr_pdf
+scripts/render_slides
+# Databricks course material is NOT stored in Git (public repo). scripts/setup.sh rebuilds it from the course files.
+portal/static/slides/
+source/text/
+source/course4/
+source/exam-guide/*.pdf
+source/exam-guide/*.txt
+scripts/render_slides
+data/raw/
+.DS_Store
+# Personal third-party practice material: keep local, never publish to Git.
+quiz-bank/examice.json
+portal/static/examice/

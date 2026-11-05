@@ -1,0 +1,10 @@
+---
+description: Targeted review of your weak topics and wrong answers
+---
+Read `progress/progress.json`. Take the `weak_topics` and the last 20 wrong `answers`.
+For each weak topic (max 3 per session):
+1. Re-explain the core idea in a NEW way (different example or analogy than before).
+2. Ask 2 new questions on it, one at a time.
+3. If both are correct, count it toward removing the topic (3 correct in a row → remove it from
+   `weak_topics`). Save every answer.
+End with what improved and what still needs work.
