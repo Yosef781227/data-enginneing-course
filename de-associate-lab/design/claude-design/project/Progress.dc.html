@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>DE Lab: Progress</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#F4F6FA}
+a{color:#2F4AC0}a:hover{color:#1F3594}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:46px;padding:0 20px;border-radius:14px;background:#3B5BDB;color:#FFFFFF;font-weight:600;font-size:15px;text-decoration:none;box-shadow:0 2px 0 #2B44A8}
+.btn:hover{background:#2F4AC0;color:#FFFFFF}
+.ghost{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:12px;background:#FFFFFF;border:1px solid #D7DCE6;color:#1C2433;font-weight:500;font-size:14px;text-decoration:none}
+.ghost:hover{background:#F0F3F9;color:#1C2433}
+.fill{transform-origin:left;animation:grow .9s cubic-bezier(.2,.8,.2,1) both}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.ring{animation:ring 1.2s cubic-bezier(.2,.8,.2,1) both}
+@keyframes ring{from{stroke-dashoffset:339}to{stroke-dashoffset:200}}
+</style>
+</helmet>
+<div style="min-height: 100vh; display: flex; flex-wrap: wrap; background: #F4F6FA; font-family: Lexend, system-ui, sans-serif; color: #1C2433;">
+  <div style="flex: 1 1 248px; background: #FFFFFF; border-right: 1px solid #E2E6EE;">
+    <dc-import name="Sidebar" active="progress" hint-size="248px,760px"></dc-import>
+  </div>
+
+  <main style="flex: 999 1 560px; min-width: 0; padding: 40px 40px 64px; box-sizing: border-box;">
+    <div style="max-width: 1080px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px;">
+      <h1 style="margin: 0; font-size: 32px; font-weight: 600; letter-spacing: -0.6px;">Your progress</h1>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+        <section aria-labelledby="ready" style="flex: 1 1 340px; background: #FFFFFF; border: 1px solid #E2E6EE; border-radius: 24px; padding: 26px; display: flex; flex-wrap: wrap; gap: 24px; align-items: center;">
+          <div style="position: relative; width: 140px; height: 140px; flex-shrink: 0;">
+            <svg width="140" height="140" viewBox="0 0 140 140" role="img" aria-label="Exam readiness 41 percent">
+              <circle cx="70" cy="70" r="54" fill="none" stroke="#EDF0F5" stroke-width="14"></circle>
+              <circle class="ring" cx="70" cy="70" r="54" fill="none" stroke="#3B5BDB" stroke-width="14" stroke-linecap="round" stroke-dasharray="339" stroke-dashoffset="200" transform="rotate(-90 70 70)"></circle>
+            </svg>
+            <div style="position: absolute; top: 0; left: 0; width: 140px; height: 140px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+              <span style="font-size: 32px; font-weight: 600;">41%</span>
+              <span style="font-size: 12px; color: #5B6577;">ready</span>
+            </div>
+          </div>
+          <div style="flex: 1 1 160px; display: flex; flex-direction: column; gap: 8px;">
+            <h2 id="ready" style="margin: 0; font-size: 20px; font-weight: 600;">Exam readiness</h2>
+            <p style="margin: 0; font-size: 14px; line-height: 1.6; color: #3D4657;">Made from your lab steps, your practice scores, and how well you remember old questions.</p>
+            <span style="font-size: 14px; color: #23784F; font-weight: 500;">+9% in the last 7 days</span>
+          </div>
+        </section>
+
+        <section aria-labelledby="week" style="flex: 1 1 340px; background: #FFFFFF; border: 1px solid #E2E6EE; border-radius: 24px; padding: 26px; display: flex; flex-direction: column; gap: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: baseline;">
+            <h2 id="week" style="margin: 0; font-size: 20px; font-weight: 600;">This week</h2>
+            <span style="font-size: 14px; color: #5B6577;">2 h 35 min</span>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 10px; align-items: end; height: 120px;" aria-label="Minutes per day: Thu 20, Fri 35, Sat 15, Sun 30, Mon 25, Tue 25, Wed 5">
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;"><div style="width: 100%; height: 57px; border-radius: 8px; background: #B9C5F2;"></div><span style="font-size: 12px; color: #5B6577;">Thu</span></div>
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;"><div style="width: 100%; height: 100px; border-radius: 8px; background: #B9C5F2;"></div><span style="font-size: 12px; color: #5B6577;">Fri</span></div>
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;"><div style="width: 100%; height: 43px; border-radius: 8px; background: #B9C5F2;"></div><span style="font-size: 12px; color: #5B6577;">Sat</span></div>
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;"><div style="width: 100%; height: 86px; border-radius: 8px; background: #B9C5F2;"></div><span style="font-size: 12px; color: #5B6577;">Sun</span></div>
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;"><div style="width: 100%; height: 71px; border-radius: 8px; background: #B9C5F2;"></div><span style="font-size: 12px; color: #5B6577;">Mon</span></div>
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;"><div style="width: 100%; height: 71px; border-radius: 8px; background: #B9C5F2;"></div><span style="font-size: 12px; color: #5B6577;">Tue</span></div>
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;"><div style="width: 100%; height: 14px; border-radius: 8px; background: #3B5BDB;"></div><span style="font-size: 12px; color: #1C2433; font-weight: 600;">Today</span></div>
+          </div>
+        </section>
+      </div>
+
+      <section aria-labelledby="nextup" style="background: #EAEFFF; border-radius: 24px; padding: 26px; display: flex; flex-direction: column; gap: 16px;">
+        <h2 id="nextup" style="margin: 0; font-size: 20px; font-weight: 600;">What to do next</h2>
+        <ol style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px;">
+          <li style="background: #FFFFFF; border-radius: 18px; padding: 18px; display: flex; flex-direction: column; gap: 10px;">
+            <span style="font-size: 12px; font-weight: 600; color: #2F4AC0;">1 · NOW</span>
+            <span style="font-weight: 600;">Finish Lab 2: Delta Lake</span>
+            <span style="font-size: 14px; color: #3D4657; line-height: 1.5;">3 steps left, about 20 minutes.</span>
+            <a class="btn" href="LabStep.dc.html" style="align-self: flex-start;">Continue</a>
+          </li>
+          <li style="background: #FFFFFF; border-radius: 18px; padding: 18px; display: flex; flex-direction: column; gap: 10px;">
+            <span style="font-size: 12px; font-weight: 600; color: #5B6577;">2 · TODAY</span>
+            <span style="font-weight: 600;">Review 12 missed questions</span>
+            <span style="font-size: 14px; color: #3D4657; line-height: 1.5;">They are due today. Missing a day makes them harder.</span>
+            <a class="ghost" href="Question.dc.html" style="align-self: flex-start;">Start review</a>
+          </li>
+          <li style="background: #FFFFFF; border-radius: 18px; padding: 18px; display: flex; flex-direction: column; gap: 10px;">
+            <span style="font-size: 12px; font-weight: 600; color: #5B6577;">3 · THIS WEEK</span>
+            <span style="font-weight: 600;">Fix your weak spot: Auto Loader</span>
+            <span style="font-size: 14px; color: #3D4657; line-height: 1.5;">Lab 5 covers it. Practice 5 questions until then.</span>
+            <a class="ghost" href="Practice.dc.html" style="align-self: flex-start;">Practise</a>
+          </li>
+        </ol>
+      </section>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start;">
+        <section aria-labelledby="bysec" style="flex: 1 1 420px; background: #FFFFFF; border: 1px solid #E2E6EE; border-radius: 24px; padding: 26px; display: flex; flex-direction: column; gap: 16px;">
+          <h2 id="bysec" style="margin: 0; font-size: 20px; font-weight: 600;">By exam section</h2>
+          <sc-for list="{{ sections }}" as="s" hint-placeholder-count="7">
+            <div style="display: flex; flex-direction: column; gap: 6px;">
+              <div style="display: flex; justify-content: space-between; gap: 12px; font-size: 14px;">
+                <span><span style="color: #5B6577;">{{s.n}}.</span> {{s.title}}</span>
+                <span style="color: {{s.fg}}; font-weight: 600; white-space: nowrap;">{{s.label}}</span>
+              </div>
+              <div style="height: 10px; border-radius: 99px; background: #EDF0F5; overflow: hidden;"><div class="fill" style="width: {{s.pct}}%; height: 10px; border-radius: 99px; background: {{s.color}};"></div></div>
+            </div>
+          </sc-for>
+          <span style="font-size: 13px; color: #5B6577; line-height: 1.5;">Bar = how many of the section’s questions you got right. Grey = not started yet.</span>
+        </section>
+
+        <div style="flex: 1 1 380px; display: flex; flex-direction: column; gap: 20px;">
+          <section aria-labelledby="bylab" style="background: #FFFFFF; border: 1px solid #E2E6EE; border-radius: 24px; padding: 26px; display: flex; flex-direction: column; gap: 12px;">
+            <div style="display: flex; justify-content: space-between; align-items: baseline;">
+              <h2 id="bylab" style="margin: 0; font-size: 20px; font-weight: 600;">Labs</h2>
+              <span style="font-size: 14px; color: #5B6577;">6 of 40 steps</span>
+            </div>
+            <sc-for list="{{ labs }}" as="l" hint-placeholder-count="9">
+              <div style="display: grid; grid-template-columns: 24px minmax(0, 1fr) auto; gap: 12px; align-items: center; font-size: 14px;">
+                <span style="color: #5B6577; font-weight: 600;">{{l.n}}</span>
+                <div style="display: flex; gap: 4px;">
+                  <sc-for list="{{ l.cells }}" as="c" hint-placeholder-count="5">
+                    <span style="flex: 1; height: 10px; border-radius: 4px; background: {{c.bg}};"></span>
+                  </sc-for>
+                </div>
+                <span style="color: #3D4657; min-width: 140px;">{{l.title}}</span>
+              </div>
+            </sc-for>
+          </section>
+
+          <section aria-labelledby="weak" style="background: #FFFFFF; border: 1px solid #E2E6EE; border-radius: 24px; padding: 26px; display: flex; flex-direction: column; gap: 12px;">
+            <h2 id="weak" style="margin: 0; font-size: 20px; font-weight: 600;">Weak topics</h2>
+            <a href="Question.dc.html" style="display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 14px; background: #FFF4EA; text-decoration: none; color: #1C2433;"><span style="display: flex; flex-direction: column;"><span style="font-weight: 600;">Auto Loader</span><span style="font-size: 13px; color: #5A3A1A;">3 of 7 right</span></span><span style="font-size: 14px; color: #9A3412; font-weight: 600;">Practise</span></a>
+            <a href="Question.dc.html" style="display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 14px; background: #FFF4EA; text-decoration: none; color: #1C2433;"><span style="display: flex; flex-direction: column;"><span style="font-weight: 600;">Python UDFs</span><span style="font-size: 13px; color: #5A3A1A;">1 of 3 right</span></span><span style="font-size: 14px; color: #9A3412; font-weight: 600;">Practise</span></a>
+            <a href="Question.dc.html" style="display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 14px; background: #FFF4EA; text-decoration: none; color: #1C2433;"><span style="display: flex; flex-direction: column;"><span style="font-weight: 600;">VACUUM</span><span style="font-size: 13px; color: #5A3A1A;">3 of 6 right</span></span><span style="font-size: 14px; color: #9A3412; font-weight: 600;">Practise</span></a>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1240}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const sec = [
+      ['1', 'Lakehouse platform', 28, 82], ['2', 'Delta Lake', 30, 71], ['3', 'Spark SQL & Python', 22, 64],
+      ['4', 'Data ingestion', 10, 48], ['5', 'Incremental processing', 6, 50], ['6', 'Production pipelines', 0, 0], ['7', 'Data governance', 0, 0]
+    ];
+    const sections = sec.map(([n, title, done, p]) => {
+      const color = done === 0 ? '#C5CCD8' : p >= 80 ? '#2F9E6B' : p >= 60 ? '#3B5BDB' : '#E8590C';
+      const fg = done === 0 ? '#5B6577' : p >= 80 ? '#23784F' : p >= 60 ? '#2F4AC0' : '#B8460A';
+      return { n, title, pct: done === 0 ? 0 : p, color, fg, label: done === 0 ? 'Not started' : p + '%' };
+    });
+    const lab = [['1', 'The Lakehouse', 4, 4], ['2', 'Delta Lake', 5, 2], ['3', 'Spark SQL', 5, 0], ['4', 'Python & DataFrames', 4, 0], ['5', 'Auto Loader', 5, 0], ['6', 'Streaming', 4, 0], ['7', 'Medallion & DLT', 5, 0], ['8', 'Jobs & Workflows', 4, 0], ['9', 'Unity Catalog', 4, 0]];
+    const labs = lab.map(([n, title, steps, done]) => ({
+      n, title,
+      cells: Array.from({ length: steps }, (_, i) => ({ bg: i < done ? '#2F9E6B' : (n === '2' && i === done ? '#B9C5F2' : '#EDF0F5') }))
+    }));
+    return { sections, labs };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,330 @@
+{
+  "profile": {
+    "exam_date": null,
+    "hours_per_week": null,
+    "started": null,
+    "last_session": "2026-10-27"
+  },
+  "lessons": {
+    "1.1": {
+      "title": "Lakeflow overview, Delta Lake, medallion architecture",
+      "status": "not_started",
+      "date": null
+    },
+    "1.2": {
+      "title": "Batch ingestion: CTAS + `read_files()`, managed vs external tables",
+      "status": "not_started",
+      "date": null
+    },
+    "1.3": {
+      "title": "Incremental batch: `COPY INTO` (idempotent, `mergeSchema`)",
+      "status": "not_started",
+      "date": null
+    },
+    "1.4": {
+      "title": "Auto Loader & streaming tables (`STREAM read_files`, `cloudFiles`)",
+      "status": "not_started",
+      "date": null
+    },
+    "1.5": {
+      "title": "Metadata columns on ingest (`_metadata.file_name`, `current_timestamp()`)",
+      "status": "not_started",
+      "date": null
+    },
+    "1.6": {
+      "title": "Rescued data column `_rescued_data`, explicit schemas",
+      "status": "not_started",
+      "date": null
+    },
+    "1.7": {
+      "title": "Semi-structured JSON: STRING `:` syntax, STRUCT (`from_json`, `schema_of_json`), VARIANT, `explode`",
+      "status": "not_started",
+      "date": null
+    },
+    "1.8": {
+      "title": "Enterprise ingestion: managed connectors, Partner Connect, Federation, Delta Sharing, Marketplace",
+      "status": "not_started",
+      "date": null
+    },
+    "1.9": {
+      "title": "`MERGE INTO`, schema evolution, `DESCRIBE HISTORY`, time travel",
+      "status": "not_started",
+      "date": null
+    },
+    "2.1": {
+      "title": "Jobs, tasks, task types, compute choice (all-purpose vs job vs serverless)",
+      "status": "not_started",
+      "date": null
+    },
+    "2.2": {
+      "title": "DAGs & dependency patterns (sequence, funnel, fan-out)",
+      "status": "not_started",
+      "date": null
+    },
+    "2.3": {
+      "title": "Parameters, task values, dynamic value refs `{{ }}`, notifications, retries",
+      "status": "not_started",
+      "date": null
+    },
+    "2.4": {
+      "title": "Triggers: scheduled (cron), file arrival, table update, continuous, manual",
+      "status": "not_started",
+      "date": null
+    },
+    "2.5": {
+      "title": "Run-if dependencies, If/else task, For each task",
+      "status": "not_started",
+      "date": null
+    },
+    "2.6": {
+      "title": "Repair runs, monitoring, `system.lakeflow` tables, Spark UI",
+      "status": "not_started",
+      "date": null
+    },
+    "2.7": {
+      "title": "Production best practices: modular orchestration (Run Job task), Git source, service principals",
+      "status": "not_started",
+      "date": null
+    },
+    "3.1": {
+      "title": "Why SDP; streaming tables vs materialized views vs (temporary) views; old DLT syntax",
+      "status": "not_started",
+      "date": null
+    },
+    "3.2": {
+      "title": "Pipeline editor & settings: compute, code assets, default catalog/schema, configuration `${key}`",
+      "status": "not_started",
+      "date": null
+    },
+    "3.3": {
+      "title": "Data quality expectations: WARN / DROP ROW / FAIL UPDATE",
+      "status": "not_started",
+      "date": null
+    },
+    "3.4": {
+      "title": "Streaming joins, triggered vs continuous, full refresh, event log",
+      "status": "not_started",
+      "date": null
+    },
+    "3.5": {
+      "title": "Change Data Capture: `AUTO CDC INTO` (formerly `APPLY CHANGES INTO`), SCD Type 1 vs 2",
+      "status": "not_started",
+      "date": null
+    },
+    "4.1": {
+      "title": "Software-engineering best practices; modularizing PySpark code",
+      "status": "not_started",
+      "date": null
+    },
+    "4.2": {
+      "title": "DevOps, DataOps, MLOps; CI vs Continuous Delivery vs Continuous Deployment",
+      "status": "not_started",
+      "date": null
+    },
+    "4.3": {
+      "title": "Planning a project; dev/stage/prod isolation (workspaces vs catalogs)",
+      "status": "not_started",
+      "date": null
+    },
+    "4.4": {
+      "title": "Unit tests: `pytest`, `assertDataFrameEqual`, `assertSchemaEqual`",
+      "status": "not_started",
+      "date": null
+    },
+    "4.5": {
+      "title": "Integration tests with SDP expectations or Jobs tasks",
+      "status": "not_started",
+      "date": null
+    },
+    "4.6": {
+      "title": "Version control: Git folders, branches, PAT, pull requests",
+      "status": "not_started",
+      "date": null
+    },
+    "4.7": {
+      "title": "CD: REST API vs CLI vs SDK; Declarative Automation Bundles (DABs)",
+      "status": "not_started",
+      "date": null
+    },
+    "5.1": {
+      "title": "Unity Catalog: metastore \u2192 catalog \u2192 schema \u2192 table/view/volume/function; GRANT/REVOKE; managed vs external; lineage",
+      "status": "not_started",
+      "date": null
+    },
+    "5.2": {
+      "title": "Delta maintenance: OPTIMIZE, Z-ORDER, liquid clustering, VACUUM, RESTORE, table properties",
+      "status": "not_started",
+      "date": null
+    },
+    "5.3": {
+      "title": "Compute & platform: all-purpose / job clusters, SQL warehouses, serverless, Photon, DBR",
+      "status": "not_started",
+      "date": null
+    },
+    "5.4": {
+      "title": "Spark SQL & PySpark transformations: joins, window functions, CTEs, higher-order functions, PIVOT, UDFs",
+      "status": "not_started",
+      "date": null
+    },
+    "5.5": {
+      "title": "Structured Streaming basics: triggers, output modes, checkpoints, watermarks",
+      "status": "not_started",
+      "date": null
+    },
+    "6.1": {
+      "title": "Clean bronze \u2192 silver: nulls, types, split/rename/drop",
+      "status": "not_started",
+      "date": null
+    },
+    "6.2": {
+      "title": "Joins (inner, left, multi-key, broadcast, cross) and unions",
+      "status": "not_started",
+      "date": null
+    },
+    "6.3": {
+      "title": "De-duplication and aggregations (approx_count_distinct, summary)",
+      "status": "not_started",
+      "date": null
+    },
+    "6.4": {
+      "title": "Spark tuning parameters",
+      "status": "not_started",
+      "date": null
+    },
+    "7.1": {
+      "title": "Data skew in the Spark UI + salting",
+      "status": "not_started",
+      "date": null
+    },
+    "7.2": {
+      "title": "Liquid clustering & predictive optimization",
+      "status": "not_started",
+      "date": null
+    },
+    "7.3": {
+      "title": "Diagnose failures: OOM, library conflicts, cluster start, timeouts; job monitoring",
+      "status": "not_started",
+      "date": null
+    },
+    "7.4": {
+      "title": "Choose compute",
+      "status": "not_started",
+      "date": null
+    },
+    "8.1": {
+      "title": "Git folders workflow",
+      "status": "not_started",
+      "date": null
+    },
+    "8.2": {
+      "title": "Bundles: variables, targets, overrides",
+      "status": "not_started",
+      "date": null
+    },
+    "8.3": {
+      "title": "Secrets (BUNDLE_VAR_) + CLI validate/deploy/run",
+      "status": "not_started",
+      "date": null
+    },
+    "9.1": {
+      "title": "GRANT / REVOKE / DENY",
+      "status": "not_started",
+      "date": null
+    },
+    "9.2": {
+      "title": "Managed vs external, SET/UNSET MANAGED",
+      "status": "not_started",
+      "date": null
+    },
+    "9.3": {
+      "title": "Column masks and row filters",
+      "status": "not_started",
+      "date": null
+    },
+    "9.4": {
+      "title": "ABAC policies",
+      "status": "not_started",
+      "date": null
+    }
+  },
+  "labs": {
+    "env": {
+      "passed": true,
+      "attempts": 2
+    },
+    "1a": {
+      "passed": true,
+      "attempts": 1
+    }
+  },
+  "answers": [
+    {
+      "date": "2026-10-27",
+      "topic": "ingestion",
+      "lesson": "1a",
+      "correct": false,
+      "question": "What does the `_delta_log` folder contain?",
+      "type": "portal"
+    },
+    {
+      "date": "2026-11-03",
+      "topic": "exam-section-1",
+      "lesson": "examice-003",
+      "correct": false,
+      "question": "Which of the following is hosted completely in the control plane of the classic Databricks architecture?",
+      "source": "examice-unverified"
+    },
+    {
+      "date": "2026-11-03",
+      "topic": "exam-section-1",
+      "lesson": "examice-003",
+      "correct": true,
+      "question": "Which of the following is hosted completely in the control plane of the classic Databricks architecture?",
+      "source": "examice-unverified"
+    },
+    {
+      "date": "2026-11-05",
+      "topic": "exam-section-1",
+      "lesson": "examice-003",
+      "correct": true,
+      "question": "Which of the following is hosted completely in the control plane of the classic Databricks architecture?",
+      "source": "examice-unverified"
+    }
+  ],
+  "weak_topics": [
+    "ingestion"
+  ],
+  "exams": [],
+  "portal": {
+    "steps": {
+      "lab1_ingestion:1a": {
+        "done": true,
+        "date": "2026-10-27"
+      }
+    },
+    "quiz": {
+      "1a": false
+    }
+  },
+  "question_bank": {
+    "examice-003": {
+      "correct": true,
+      "choices": [
+        "C"
+      ],
+      "attempts": 3,
+      "date": "2026-11-05",
+      "streak": 2,
+      "next_review": "2026-11-08"
+    }
+  },
+  "study_topics": {
+    "architecture": {
+      "understood": false,
+      "date": "2026-11-05"
+    }
+  },
+  "activity": {
+    "2026-11-05": 24
+  }
+}

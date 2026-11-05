@@ -1,0 +1,17 @@
+---
+description: Exam-style quiz, one question at a time, e.g. /quiz delta 5
+argument-hint: [topic] [number of questions]  (default: weak topics, 5)
+---
+Run a quiz. Arguments: **$ARGUMENTS** (topic and/or count; default = 5 questions mixed from
+`weak_topics` in `progress/progress.json`, or all topics if none).
+
+Rules:
+- Write NEW questions in the style of the real exam: a short scenario, then 4 options A–D,
+  exactly one correct. Use the course material (`notes/`, `source/text/`) as the source of facts.
+  Use the question bank in `quiz-bank/` for inspiration but vary the wording.
+- Ask ONE question at a time. Wait for the answer (the learner types A/B/C/D).
+- After each answer: say ✅ or ❌, explain why the right answer is right AND why each wrong option
+  is wrong (one line each), and cite the source (course + slide/notebook).
+- Append each result to `answers` in `progress/progress.json` with its topic tag; add the topic to
+  `weak_topics` after a wrong answer.
+- At the end: score, time-per-topic breakdown, and which lessons to revisit.
