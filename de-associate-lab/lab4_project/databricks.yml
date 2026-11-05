@@ -1,0 +1,50 @@
+# Declarative Automation Bundle (formerly Databricks Asset Bundle) — example for reading only.
+# Deploy with the Databricks CLI:  databricks bundle validate / deploy -t dev / run -t dev health_etl_job
+bundle:
+  name: health_etl
+
+variables:
+  catalog:
+    description: Catalog for this environment
+    default: dev_catalog
+
+resources:
+  jobs:
+    health_etl_job:
+      name: health_etl_${bundle.target}
+      tasks:
+        - task_key: unit_tests
+          notebook_task:
+            notebook_path: ./run_unit_tests.py
+        - task_key: health_etl
+          depends_on: [{ task_key: unit_tests }]
+          pipeline_task:
+            pipeline_id: ${resources.pipelines.health_pipeline.id}
+        - task_key: visualization
+          depends_on: [{ task_key: health_etl }]
+          notebook_task:
+            notebook_path: ./src/final_visualization.py
+            base_parameters:
+              catalog_name: ${var.catalog}
+              target: ${bundle.target}
+  pipelines:
+    health_pipeline:
+      name: health_pipeline_${bundle.target}
+      catalog: ${var.catalog}
+      schema: default
+      serverless: true
+      libraries:
+        - glob: { include: ./src/sdp/** }
+      configuration:
+        target: ${bundle.target}
+
+targets:
+  dev:
+    mode: development        # resources get a [dev username] prefix, schedules paused
+    default: true
+    variables:
+      catalog: dev_catalog
+  prod:
+    mode: production
+    variables:
+      catalog: prod_catalog

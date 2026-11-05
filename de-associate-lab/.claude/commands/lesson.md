@@ -1,0 +1,19 @@
+---
+description: Teach a lesson interactively, e.g. /lesson 1.4
+argument-hint: <lesson id, e.g. 1.4>  (empty = next unfinished)
+---
+Teach lesson **$ARGUMENTS** (if empty, pick the next lesson that is not `done` in `progress/progress.json`).
+
+1. Find the lesson row in `curriculum.md`. Read its study notes section in `notes/`, then grep
+   the listed slide numbers in `source/text/slides/` and open the listed course notebook in
+   `source/text/notebooks/`.
+2. Tell the learner the lesson title, 3–5 learning goals, and how much exam weight the topic has.
+3. Teach in chunks of ONE concept at a time:
+   - simple explanation (≤ 6 short lines) + a tiny SQL or PySpark example from the course
+   - one check question (multiple choice or "what does this return?")
+   - STOP and wait for the answer. Give feedback, then continue.
+4. After the concepts, if the curriculum lists a local lab, offer to run it (`/lab <id>`). If the
+   lesson needs Databricks-only features, point to the course notebook to run in Free Edition.
+5. Finish with a 3-question mini quiz, a 3-line summary of the lesson, and the exam traps.
+6. Update `progress/progress.json`: lesson status `done` (or `in_progress` if stopped early),
+   date, and quiz answers.

@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>DE Lab style guide</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 22px;border-radius:14px;border:0;background:#3B5BDB;color:#FFFFFF;font:inherit;font-weight:600;font-size:16px;box-shadow:0 2px 0 #2B44A8}
+.gap{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:600;width:120px;height:32px;padding:0 8px;border-radius:8px;border:2px dashed #7C93F0;background:#1F2A44;color:#FFFFFF;box-sizing:border-box;text-transform:uppercase}
+.sw{display:flex;flex-direction:column;gap:8px}
+.sw span.c{height:72px;border-radius:16px}
+.h{margin:0;font-size:13px;font-weight:600;color:#2F4AC0;text-transform:uppercase;letter-spacing:.8px}
+</style>
+</helmet>
+<div style="width: 1440px; box-sizing: border-box; padding: 64px; background: #F4F6FA; font-family: Lexend, system-ui, sans-serif; color: #1C2433; display: flex; flex-direction: column; gap: 40px;">
+  <div style="display: flex; flex-direction: column; gap: 10px;">
+    <h1 style="margin: 0; font-size: 44px; font-weight: 600; letter-spacing: -1px;">DE Lab style guide</h1>
+    <p style="margin: 0; font-size: 18px; color: #3D4657; max-width: 820px; line-height: 1.6;">Calm, friendly, easy to read for hours. One accent colour means “do this now”. Green only means “done”. Plain words, short sentences.</p>
+  </div>
+
+  <section style="display: flex; flex-direction: column; gap: 16px;">
+    <h2 class="h">Colour</h2>
+    <div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 16px;">
+      <div class="sw"><span class="c" style="background: #3B5BDB;"></span><strong style="font-size: 15px;">Primary · #3B5BDB</strong><span style="font-size: 13px; color: #5B6577;">Next step, main buttons, current item. Hover #2F4AC0, soft #EAEFFF</span></div>
+      <div class="sw"><span class="c" style="background: #2F9E6B;"></span><strong style="font-size: 15px;">Success · #2F9E6B</strong><span style="font-size: 13px; color: #5B6577;">Checkmarks, done, correct. Text #23784F, soft #E9F6EF</span></div>
+      <div class="sw"><span class="c" style="background: #FF922B;"></span><strong style="font-size: 15px;">Reward · #FF922B</strong><span style="font-size: 13px; color: #5B6577;">Streaks, review queue, needs work. Text #9A4A00, soft #FFF6EC</span></div>
+      <div class="sw"><span class="c" style="background: #F2DC9B;"></span><strong style="font-size: 15px;">Caution · #FFF6D9</strong><span style="font-size: 13px; color: #5B6577;">Doubtful source answer. Text #6B4600, border #F2DC9B</span></div>
+      <div class="sw"><span class="c" style="background: #E03131;"></span><strong style="font-size: 15px;">Wrong · #E03131</strong><span style="font-size: 13px; color: #5B6577;">Wrong answer, only after answering. Text #B42318, soft #FDEDED</span></div>
+      <div class="sw"><span class="c" style="background: #18203A;"></span><strong style="font-size: 15px;">Code · #18203A</strong><span style="font-size: 13px; color: #5B6577;">Editor. Terminal #0E1426, gap #1F2A44</span></div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 16px;">
+      <div class="sw"><span class="c" style="background: #F4F6FA; border: 1px solid #E2E6EE;"></span><strong style="font-size: 15px;">Ground · #F4F6FA</strong></div>
+      <div class="sw"><span class="c" style="background: #FFFFFF; border: 1px solid #E2E6EE;"></span><strong style="font-size: 15px;">Surface · #FFFFFF</strong></div>
+      <div class="sw"><span class="c" style="background: #E2E6EE;"></span><strong style="font-size: 15px;">Line · #E2E6EE</strong></div>
+      <div class="sw"><span class="c" style="background: #1C2433;"></span><strong style="font-size: 15px;">Ink · #1C2433</strong></div>
+      <div class="sw"><span class="c" style="background: #3D4657;"></span><strong style="font-size: 15px;">Body · #3D4657</strong></div>
+      <div class="sw"><span class="c" style="background: #5B6577;"></span><strong style="font-size: 15px;">Muted · #5B6577</strong></div>
+    </div>
+  </section>
+
+  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px;">
+    <section style="background: #FFFFFF; border: 1px solid #E2E6EE; border-radius: 24px; padding: 28px; display: flex; flex-direction: column; gap: 16px;">
+      <h2 class="h">Type · Lexend (made for easy reading) + JetBrains Mono</h2>
+      <div style="display: flex; align-items: baseline; gap: 20px;"><span style="width: 120px; font-size: 13px; color: #5B6577;">Page title</span><span style="font-size: 32px; font-weight: 600; letter-spacing: -0.6px;">Labs</span><span style="font-size: 13px; color: #5B6577;">32/600</span></div>
+      <div style="display: flex; align-items: baseline; gap: 20px;"><span style="width: 120px; font-size: 13px; color: #5B6577;">Step title</span><span style="font-size: 28px; font-weight: 600;">Go back in time</span><span style="font-size: 13px; color: #5B6577;">28/600</span></div>
+      <div style="display: flex; align-items: baseline; gap: 20px;"><span style="width: 120px; font-size: 13px; color: #5B6577;">Card title</span><span style="font-size: 20px; font-weight: 600;">Today’s plan</span><span style="font-size: 13px; color: #5B6577;">20/600</span></div>
+      <div style="display: flex; align-items: baseline; gap: 20px;"><span style="width: 120px; font-size: 13px; color: #5B6577;">Lesson</span><span style="font-size: 17px; line-height: 1.6;">A table with version history.</span><span style="font-size: 13px; color: #5B6577;">17/400, line 1.6</span></div>
+      <div style="display: flex; align-items: baseline; gap: 20px;"><span style="width: 120px; font-size: 13px; color: #5B6577;">Body</span><span style="font-size: 15px;">About 8 min · 2 code gaps</span><span style="font-size: 13px; color: #5B6577;">15/400</span></div>
+      <div style="display: flex; align-items: baseline; gap: 20px;"><span style="width: 120px; font-size: 13px; color: #5B6577;">Code</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 15px;">DESCRIBE HISTORY students;</span></div>
+    </section>
+
+    <section style="background: #FFFFFF; border: 1px solid #E2E6EE; border-radius: 24px; padding: 28px; display: flex; flex-direction: column; gap: 18px;">
+      <h2 class="h">Controls</h2>
+      <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center;">
+        <button class="btn">Continue step 3</button>
+        <button class="btn" style="background: #2F9E6B; box-shadow: 0 2px 0 #23784F;">Next step</button>
+        <button class="btn" style="background: #E8590C; box-shadow: 0 2px 0 #B8460A;">Start review</button>
+        <button style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 12px; background: #FFFFFF; border: 1px solid #D7DCE6; font: inherit; font-size: 14px; font-weight: 500;">Secondary</button>
+      </div>
+      <span style="font-size: 13px; color: #5B6577;">Radius 14 · height 48 (44 min touch) · 2px bottom shadow makes buttons feel pressable. One blue button per screen.</span>
+      <div style="display: flex; flex-direction: column; gap: 10px; padding: 18px; border-radius: 16px; background: #18203A;">
+        <span style="font-size: 13px; color: #AEB8D6;">Code gaps: empty · focused · correct · wrong</span>
+        <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+          <input class="gap" aria-label="Empty gap" placeholder="?">
+          <input class="gap" aria-label="Focused gap" value="HIST" style="border-style: solid; border-color: #9DB0FF; box-shadow: 0 0 0 3px rgba(124,147,240,.35);">
+          <input class="gap" aria-label="Correct gap" value="HISTORY" style="border: 2px solid #4CC38A; background: #173A2C;">
+          <input class="gap" aria-label="Wrong gap" value="LOG" style="border: 2px solid #FF8787; background: #3D1F25;">
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px;">
+    <section style="background: #FFFFFF; border: 1px solid #E2E6EE; border-radius: 24px; padding: 28px; display: flex; flex-direction: column; gap: 14px;">
+      <h2 class="h">Step states</h2>
+      <div style="display: flex; align-items: center; gap: 12px;"><span style="width: 32px; height: 32px; border-radius: 99px; background: #2F9E6B; display: flex; align-items: center; justify-content: center;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></span><span>Done</span></div>
+      <div style="display: flex; align-items: center; gap: 12px;"><span style="width: 32px; height: 32px; border-radius: 99px; border: 3px solid #3B5BDB; background: #EAEFFF; box-sizing: border-box; color: #2F4AC0; font-weight: 700; display: flex; align-items: center; justify-content: center;">3</span><span>Now</span></div>
+      <div style="display: flex; align-items: center; gap: 12px;"><span style="width: 32px; height: 32px; border-radius: 99px; background: #EAEFFF; color: #2F4AC0; font-weight: 700; display: flex; align-items: center; justify-content: center;">4</span><span>Open (unlocked)</span></div>
+      <div style="display: flex; align-items: center; gap: 12px;"><span style="width: 32px; height: 32px; border-radius: 99px; background: #F0F2F6; display: flex; align-items: center; justify-content: center;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#5B6577" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg></span><span>Locked</span></div>
+    </section>
+
+    <section style="background: #FFFFFF; border: 1px solid #E2E6EE; border-radius: 24px; padding: 28px; display: flex; flex-direction: column; gap: 12px;">
+      <h2 class="h">Motion</h2>
+      <ul style="margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 8px; font-size: 15px; line-height: 1.5; color: #3D4657;">
+        <li><strong style="color: #1C2433;">Check pop</strong>: green circle scales 0.3 → 1, 500 ms, overshoot (cubic-bezier .2,1.6,.4,1)</li>
+        <li><strong style="color: #1C2433;">Rise</strong>: new feedback slides up 10 px and fades in, 450 ms</li>
+        <li><strong style="color: #1C2433;">Progress fill</strong>: bars and rings grow from 0, 900 ms ease-out</li>
+        <li><strong style="color: #1C2433;">Wrong gap</strong>: small shake, 350 ms, never red flashing</li>
+        <li>Turn all of it off when the system asks for reduced motion</li>
+      </ul>
+    </section>
+
+    <section style="background: #FFFFFF; border: 1px solid #E2E6EE; border-radius: 24px; padding: 28px; display: flex; flex-direction: column; gap: 12px;">
+      <h2 class="h">Words</h2>
+      <ul style="margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 8px; font-size: 15px; line-height: 1.5; color: #3D4657;">
+        <li>Sentences under 15 words. One idea each.</li>
+        <li>Explain a new term the first time, in “New words”.</li>
+        <li>Buttons say what happens: “Check my answer”, not “Submit”.</li>
+        <li>Mistakes are normal: “Not quite”, never “Wrong!”.</li>
+        <li>Always show time: “About 8 min”.</li>
+      </ul>
+    </section>
+  </div>
+
+  <section style="display: flex; flex-direction: column; gap: 14px;">
+    <h2 class="h">Feedback</h2>
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px;">
+      <div style="display: flex; align-items: center; gap: 14px; padding: 16px 18px; border-radius: 18px; background: #E9F6EF;"><span style="width: 40px; height: 40px; border-radius: 99px; background: #2F9E6B; display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></span><span style="font-weight: 600; color: #1B5E3F;">Correct! Step 4 is open.</span></div>
+      <div style="display: flex; align-items: center; gap: 14px; padding: 16px 18px; border-radius: 18px; background: #FDEDED;"><span style="width: 40px; height: 40px; border-radius: 99px; background: #E03131; display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7l10 10M17 7L7 17"></path></svg></span><span style="font-weight: 600; color: #8F1D16;">Not quite. The answer is B.</span></div>
+      <div style="display: flex; align-items: center; gap: 14px; padding: 16px 18px; border-radius: 18px; background: #FFF6D9; border: 1px solid #F2DC9B;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8A5A00" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l10 18H2z"></path><path d="M12 10v4"></path><path d="M12 17h.01"></path></svg><span style="font-weight: 600; color: #6B4600;">Careful: the source answer may be wrong</span></div>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1480}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

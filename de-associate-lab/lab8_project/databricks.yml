@@ -1,0 +1,41 @@
+# Lab 8 — Declarative Automation Bundle (formerly Databricks Asset Bundle)
+# Replace every FILL-IN marker. One file describes the job; targets change only what differs per environment.
+bundle:
+  name: health_etl
+
+variables:
+  catalog:
+    description: Catalog for this environment
+    default: <FILL-IN 1>
+  db_password:
+    description: Database password. NO default here! CI passes it as an environment variable.
+
+resources:
+  jobs:
+    health_etl_job:
+      name: health_etl_<FILL-IN 2>
+      tasks:
+        - task_key: ingest
+          notebook_task:
+            notebook_path: ./src/ingest.py
+            base_parameters:
+              catalog: <FILL-IN 3>
+              db_password: ${var.db_password}
+
+targets:
+  dev:
+    mode: development
+    default: <FILL-IN 4>
+  test:
+    variables:
+      catalog: <FILL-IN 5>
+  prod:
+    mode: <FILL-IN 6>
+    variables:
+      catalog: prod_catalog
+    resources:              # override: only prod runs on a schedule
+      jobs:
+        health_etl_job:
+          schedule:
+            quartz_cron_expression: "0 0 6 * * ?"
+            timezone_id: UTC

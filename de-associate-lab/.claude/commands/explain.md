@@ -1,0 +1,16 @@
+---
+description: Explain any topic simply, grounded in the course material
+argument-hint: <topic, e.g. "COPY INTO vs Auto Loader">
+---
+Explain **$ARGUMENTS** for the exam.
+
+- Search the course text first: `grep -ril` in `source/text/` and `notes/` for the key words.
+  Read the best matches.
+- Answer in this shape, using simple English:
+  1. **In one sentence** — what it is.
+  2. **Why it exists** — the problem it solves.
+  3. **Example** — a small SQL/PySpark snippet (from the course if possible).
+  4. **Compare** — how it differs from the thing it is usually confused with (table if useful).
+  5. **⚠ Exam traps** — 1–3 bullets.
+  6. **Source** — "Course N, slides X–Y" / notebook name.
+- End with one check question and wait for the answer. Log the answer in `progress/progress.json`.

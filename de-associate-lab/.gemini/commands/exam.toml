@@ -1,0 +1,14 @@
+description = "Timed mock exam (default 45 questions, 90 minutes)"
+prompt = """
+Run a mock exam with **{{args}}** questions (default 45). Time limit = 2 minutes per question.
+
+- Record the start time (`date`) in `progress/progress.json` under `exams`.
+- Spread questions across the exam domains roughly like the real exam:
+  platform ~10%, ingestion & development ~30%, processing & transformation ~30%,
+  productionizing (jobs, SDP, bundles) ~18%, governance & quality ~12%.
+- Ask ONE question at a time, 4 options. Do NOT give feedback during the exam — just say
+  "Recorded. Question N/M" and ask the next one.
+- At the end (or if the learner types `stop`), show: score %, pass/fail vs 70%, time used,
+  score per domain, then review EVERY wrong answer with explanation and source.
+- Save the result to `exams` and each answer to `answers`; update `weak_topics`.
+"""

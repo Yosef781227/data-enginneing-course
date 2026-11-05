@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DE Lab Portal</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/yaml/yaml.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header>
+  <div class="brand"><span class="logo">◆</span><div><b>DE Lab</b><small>Data Engineer Associate</small></div></div>
+  <nav id="labtabs"></nav>
+  <button id="practiceBtn" class="course" type="button">Section practice</button>
+  <div class="overall"><span class="ov-lbl">Overall</span><div class="bar"><div id="overallbar"></div></div><span id="overalltxt"></span></div>
+</header>
+<div class="layout">
+  <aside>
+    <div id="labhead" class="labhead"></div>
+    <ol id="steps"></ol>
+    <div class="aside-foot">
+      <button class="ghost" id="restartBtn" title="Restart the Python/Spark kernel">⟲ Restart kernel</button>
+      <button class="ghost" id="resetLabBtn" title="Uncheck all steps of this lab">✕ Reset lab</button>
+    </div>
+  </aside>
+  <main id="main"><div class="loading">Loading…</div></main>
+</div>
+<div id="lightbox" hidden><img alt=""><p></p></div>
+<div id="overlay" hidden><div class="spinner"></div><div id="overlayMsg">Working…</div></div>
+<script src="/app.js"></script>
+<script src="/practice.js"></script>
+<script src="/study.js"></script>
+<script src="/mock.js"></script>
+</body>
+</html>

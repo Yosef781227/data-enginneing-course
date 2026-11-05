@@ -1,0 +1,17 @@
+description = "Guided hands-on lab in a local Jupyter notebook, e.g. /lab 1"
+prompt = """
+Run hands-on lab **{{args}}** (see the "Local lab" column in `curriculum.md`).
+
+1. Check the environment: `.venv/bin/python -m labutils.check env`. If it fails, help fix it.
+2. Open the notebook in `notebooks/` and tell the learner how to open it themselves:
+   `.venv/bin/jupyter lab notebooks/<file>.ipynb` (VS Code: open the .ipynb and pick the `.venv`
+   kernel).
+3. Walk through the exercises one by one. For each exercise:
+   - explain the goal and which exam topic it practices
+   - let the learner write the code in the notebook (cells marked `# TODO`)
+   - when they say "check", run `.venv/bin/python -m labutils.check <exercise-id>` and explain
+     the result; give a hint first, the solution only if they ask twice
+4. Say clearly which parts are a local simulation of a Databricks-only feature, and what the
+   real Databricks syntax is.
+5. Record finished exercises in `progress/progress.json` under `labs`.
+"""

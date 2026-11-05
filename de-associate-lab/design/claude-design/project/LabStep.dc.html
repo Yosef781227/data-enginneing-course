@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Lab 2, step 3: Go back in time</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#F4F6FA}
+a{color:#2F4AC0}a:hover{color:#1F3594}
+.tab{min-height:40px;padding:0 14px;border-radius:10px;border:0;background:transparent;font:inherit;font-size:14px;font-weight:500;color:#5B6577;cursor:pointer}
+.tab:hover{background:#EEF1F7;color:#1C2433}
+.tab.on{background:#FFFFFF;color:#1C2433;font-weight:600;box-shadow:0 1px 3px rgba(28,36,51,.12)}
+.gap{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:600;width:120px;height:32px;padding:0 8px;border-radius:8px;border:2px dashed #7C93F0;background:#1F2A44;color:#FFFFFF;outline:none;text-transform:uppercase;box-sizing:border-box}
+.gap:focus{border-style:solid;border-color:#9DB0FF;box-shadow:0 0 0 3px rgba(124,147,240,.35)}
+.gap.ok{border:2px solid #4CC38A;background:#173A2C}
+.gap.bad{border:2px solid #FF8787;background:#3D1F25;animation:shake .35s}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 22px;border-radius:14px;border:0;background:#3B5BDB;color:#FFFFFF;font:inherit;font-weight:600;font-size:16px;cursor:pointer;text-decoration:none;box-shadow:0 2px 0 #2B44A8;transition:transform .12s,background .15s}
+.btn:hover{background:#2F4AC0;color:#FFFFFF;transform:translateY(-1px)}
+.btn.green{background:#2F9E6B;box-shadow:0 2px 0 #23784F}
+.btn.green:hover{background:#28895C}
+.ghost{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:12px;background:#FFFFFF;border:1px solid #D7DCE6;color:#1C2433;font:inherit;font-weight:500;font-size:14px;cursor:pointer;text-decoration:none}
+.ghost:hover{background:#F0F3F9;color:#1C2433}
+.run{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 16px;border-radius:10px;border:0;background:#2A3758;color:#FFFFFF;font:inherit;font-size:14px;font-weight:600;cursor:pointer}
+.run:hover{background:#34446B}
+.opt{display:flex;gap:14px;align-items:center;width:100%;text-align:left;min-height:52px;padding:12px 16px;border-radius:14px;border:2px solid #E2E6EE;background:#FFFFFF;font:inherit;font-size:15px;color:#1C2433;cursor:pointer;box-sizing:border-box}
+.opt:hover{border-color:#B9C5F2;background:#F7F9FF}
+.opt.right{border-color:#2F9E6B;background:#E9F6EF}
+.opt.wrong{border-color:#E03131;background:#FDEDED}
+.pop{animation:pop .5s cubic-bezier(.2,1.6,.4,1) both}
+.rise{animation:rise .45s ease-out both}
+@keyframes pop{0%{transform:scale(.3);opacity:0}100%{transform:scale(1);opacity:1}}
+@keyframes rise{from{transform:translateY(10px);opacity:0}to{transform:none;opacity:1}}
+@keyframes shake{0%,100%{transform:none}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F4F6FA; font-family: Lexend, system-ui, sans-serif; color: #1C2433; display: flex; flex-direction: column;">
+
+  <header style="background: #FFFFFF; border-bottom: 1px solid #E2E6EE; padding: 12px 28px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px;">
+    <a href="Labs.dc.html" class="ghost" style="border: 0; padding: 0 10px;">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg>
+      All labs
+    </a>
+    <div style="display: flex; flex-direction: column;">
+      <span style="font-size: 12px; color: #5B6577;">Lab 2 of 9</span>
+      <span style="font-size: 16px; font-weight: 600;">Delta Lake: a table that remembers</span>
+    </div>
+    <nav aria-label="Steps in this lab" style="display: flex; align-items: center; gap: 6px; margin-left: auto; flex-wrap: wrap;">
+      <a href="#" style="display: flex; align-items: center; gap: 8px; padding: 6px 10px 6px 6px; border-radius: 99px; text-decoration: none; color: #23784F; font-size: 13px; font-weight: 500;"><span style="width: 26px; height: 26px; border-radius: 99px; background: #2F9E6B; display: flex; align-items: center; justify-content: center;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></span>Make a table</a>
+      <a href="#" style="display: flex; align-items: center; gap: 8px; padding: 6px 10px 6px 6px; border-radius: 99px; text-decoration: none; color: #23784F; font-size: 13px; font-weight: 500;"><span style="width: 26px; height: 26px; border-radius: 99px; background: #2F9E6B; display: flex; align-items: center; justify-content: center;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></span>Change rows</a>
+      <span aria-current="step" style="display: flex; align-items: center; gap: 8px; padding: 6px 12px 6px 6px; border-radius: 99px; background: #EAEFFF; color: #2F4AC0; font-size: 13px; font-weight: 600;">
+        <sc-if value="{{ passed }}" hint-placeholder-val="{{ false }}"><span class="pop" style="width: 26px; height: 26px; border-radius: 99px; background: #2F9E6B; display: flex; align-items: center; justify-content: center;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></span></sc-if>
+        <sc-if value="{{ notPassed }}" hint-placeholder-val="{{ true }}"><span style="width: 26px; height: 26px; border-radius: 99px; border: 3px solid #3B5BDB; box-sizing: border-box; display: flex; align-items: center; justify-content: center; font-weight: 700;">3</span></sc-if>
+        Go back in time
+      </span>
+      <span style="display: flex; align-items: center; gap: 8px; padding: 6px 10px 6px 6px; font-size: 13px; color: #5B6577;">
+        <sc-if value="{{ passed }}" hint-placeholder-val="{{ false }}"><span class="pop" style="width: 26px; height: 26px; border-radius: 99px; background: #EAEFFF; color: #2F4AC0; display: flex; align-items: center; justify-content: center; font-weight: 700;">4</span></sc-if>
+        <sc-if value="{{ notPassed }}" hint-placeholder-val="{{ true }}"><span style="width: 26px; height: 26px; border-radius: 99px; background: #F0F2F6; display: flex; align-items: center; justify-content: center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#5B6577" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-label="Locked" role="img"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg></span></sc-if>
+        Clean up
+      </span>
+      <span style="display: flex; align-items: center; gap: 8px; padding: 6px 10px 6px 6px; font-size: 13px; color: #5B6577;"><span style="width: 26px; height: 26px; border-radius: 99px; background: #F0F2F6; display: flex; align-items: center; justify-content: center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#5B6577" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-label="Locked" role="img"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg></span>Undo a mistake</span>
+    </nav>
+  </header>
+
+  <div style="flex-grow: 1; padding: 28px; box-sizing: border-box;">
+    <div style="max-width: 1360px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start;">
+
+      <section aria-labelledby="learn" style="flex: 1 1 420px; min-width: 0; background: #FFFFFF; border: 1px solid #E2E6EE; border-radius: 24px; padding: 28px; box-sizing: border-box; display: flex; flex-direction: column; gap: 20px;">
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <span style="font-size: 13px; font-weight: 600; color: #2F4AC0; text-transform: uppercase; letter-spacing: 0.8px;">Step 3 · Learn</span>
+          <h1 id="learn" style="margin: 0; font-size: 28px; font-weight: 600; letter-spacing: -0.4px;">Go back in time</h1>
+        </div>
+
+        <div role="tablist" aria-label="Ways to learn" style="display: flex; flex-wrap: wrap; gap: 4px; padding: 4px; border-radius: 14px; background: #F0F2F6;">
+          <button role="tab" class="tab {{tabs.idea}}" onClick="{{ tIdea }}">The idea</button>
+          <button role="tab" class="tab {{tabs.words}}" onClick="{{ tWords }}">In plain words</button>
+          <button role="tab" class="tab {{tabs.slides}}" onClick="{{ tSlides }}">Course slides</button>
+        </div>
+
+        <sc-if value="{{ show.idea }}" hint-placeholder-val="{{ true }}">
+          <div class="rise" style="display: flex; flex-direction: column; gap: 20px;">
+            <div style="display: flex; gap: 14px; padding: 18px; border-radius: 18px; background: #FFF6EC;">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C2410C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a7 7 0 0 0-4 12.7V16h8v-1.3A7 7 0 0 0 12 2z"></path></svg>
+              <div style="display: flex; flex-direction: column; gap: 6px;">
+                <span style="font-size: 14px; font-weight: 600; color: #9A3412;">Think of it like…</span>
+                <p style="margin: 0; font-size: 17px; line-height: 1.6;">A shared document with <strong>version history</strong>. Every time someone changes it, a new version is saved. You can open any old version to see how it looked.</p>
+              </div>
+            </div>
+
+            <figure style="margin: 0; display: flex; flex-direction: column; gap: 12px;">
+              <div style="display: flex; align-items: stretch; gap: 0; overflow-x: auto; padding: 4px 0;">
+                <div style="flex: 1 0 96px; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                  <span style="width: 44px; height: 44px; border-radius: 14px; background: #F0F2F6; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-weight: 600; color: #3D4657;">v0</span>
+                  <span style="font-size: 13px; text-align: center; color: #3D4657;">Table made</span>
+                </div>
+                <div aria-hidden="true" style="flex: 0 0 24px; height: 3px; background: #D7DCE6; margin-top: 21px;"></div>
+                <div style="flex: 1 0 96px; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                  <span style="width: 44px; height: 44px; border-radius: 14px; background: #E2F0FF; border: 3px solid #3B5BDB; box-sizing: border-box; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-weight: 600; color: #2F4AC0;">v1</span>
+                  <span style="font-size: 13px; text-align: center; color: #1C2433; font-weight: 600;">3 students added</span>
+                </div>
+                <div aria-hidden="true" style="flex: 0 0 24px; height: 3px; background: #D7DCE6; margin-top: 21px;"></div>
+                <div style="flex: 1 0 96px; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                  <span style="width: 44px; height: 44px; border-radius: 14px; background: #F0F2F6; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-weight: 600; color: #3D4657;">v2</span>
+                  <span style="font-size: 13px; text-align: center; color: #3D4657;">2 more added</span>
+                </div>
+                <div aria-hidden="true" style="flex: 0 0 24px; height: 3px; background: #D7DCE6; margin-top: 21px;"></div>
+                <div style="flex: 1 0 96px; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                  <span style="width: 44px; height: 44px; border-radius: 14px; background: #FDEDED; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-weight: 600; color: #B42318;">v3</span>
+                  <span style="font-size: 13px; text-align: center; color: #3D4657;">Rows deleted (oops)</span>
+                </div>
+              </div>
+              <figcaption style="font-size: 14px; color: #5B6577; line-height: 1.5;">Each change makes a new version. The blue one (v1) is the one we will read in this step.</figcaption>
+            </figure>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ show.words }}" hint-placeholder-val="{{ false }}">
+          <div class="rise" style="display: flex; flex-direction: column; gap: 14px; font-size: 16px; line-height: 1.65;">
+            <p style="margin: 0;">A <strong>Delta table</strong> keeps a list of every change. This list is called the <strong>transaction log</strong>.</p>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+              <div style="display: flex; gap: 12px; padding: 14px; border-radius: 14px; background: #F4F6FA;"><code style="font-family: 'JetBrains Mono', monospace; font-weight: 600; color: #2F4AC0; white-space: nowrap;">DESCRIBE HISTORY</code><span>shows the list of versions.</span></div>
+              <div style="display: flex; gap: 12px; padding: 14px; border-radius: 14px; background: #F4F6FA;"><code style="font-family: 'JetBrains Mono', monospace; font-weight: 600; color: #2F4AC0; white-space: nowrap;">VERSION AS OF</code><span>reads the table as it was at one version.</span></div>
+            </div>
+            <p style="margin: 0; color: #3D4657;">This is called <strong>time travel</strong>. It is often on the exam.</p>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ show.slides }}" hint-placeholder-val="{{ false }}">
+          <div class="rise" style="display: flex; flex-direction: column; gap: 12px;">
+            <div style="aspect-ratio: 16 / 9; border-radius: 16px; background: #EEF1F7; border: 1px dashed #B8C0CF; display: flex; align-items: center; justify-content: center; text-align: center; color: #5B6577; font-size: 14px; padding: 16px;">[COURSE SLIDE: Delta Lake time travel]</div>
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 14px; color: #5B6577;">
+              <button class="ghost" aria-label="Previous slide">Prev</button>
+              <span>Slide 2 of 4</span>
+              <button class="ghost" aria-label="Next slide">Next</button>
+            </div>
+          </div>
+        </sc-if>
+
+        <details style="border-top: 1px solid #E2E6EE; padding-top: 16px;">
+          <summary style="cursor: pointer; font-size: 15px; font-weight: 600; min-height: 32px;">New words in this step (2)</summary>
+          <dl style="margin: 12px 0 0; display: grid; grid-template-columns: auto 1fr; gap: 10px 16px; font-size: 15px; line-height: 1.5;">
+            <dt style="font-weight: 600;">Version</dt><dd style="margin: 0; color: #3D4657;">A saved state of the table after one change.</dd>
+            <dt style="font-weight: 600;">Transaction log</dt><dd style="margin: 0; color: #3D4657;">The list of all changes. Delta keeps it next to your data.</dd>
+          </dl>
+        </details>
+      </section>
+
+      <section aria-labelledby="do" style="flex: 1.3 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 20px;">
+        <div style="background: #FFFFFF; border: 1px solid #E2E6EE; border-radius: 24px; padding: 24px; display: flex; flex-direction: column; gap: 16px;">
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px;">
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-size: 13px; font-weight: 600; color: #2F4AC0; text-transform: uppercase; letter-spacing: 0.8px;">Your turn</span>
+              <h2 id="do" style="margin: 0; font-size: 20px; font-weight: 600;">Fill the 2 gaps, run it, then check</h2>
+            </div>
+            <button class="ghost" onClick="{{ toggleSolution }}" style="font-size: 13px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+              {{solutionLabel}}
+            </button>
+          </div>
+
+          <div style="border-radius: 18px; background: #18203A; overflow: hidden;">
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 16px; background: #111830; color: #AEB8D6; font-size: 13px;">
+              <span style="font-family: 'JetBrains Mono', monospace;">time_travel.sql</span>
+              <span>SQL</span>
+            </div>
+            <div style="padding: 18px 0; font-family: 'JetBrains Mono', monospace; font-size: 15px; line-height: 2.2; color: #E6EBFA; overflow-x: auto;">
+              <div style="display: flex; gap: 18px; padding: 0 18px;"><span style="color: #7380A6; width: 18px; text-align: right;">1</span><span style="color: #8FA3D1;">-- ① Show every saved version of the table</span></div>
+              <div style="display: flex; gap: 18px; padding: 0 18px; align-items: center;"><span style="color: #7380A6; width: 18px; text-align: right;">2</span><span style="display: flex; align-items: center; gap: 8px; white-space: nowrap;"><span style="color: #8DB4FF; font-weight: 600;">DESCRIBE</span>
+                <label style="display: inline-flex; align-items: center; gap: 4px;"><span style="font-size: 12px; color: #FFD08A; font-weight: 600;">①</span><input class="gap {{g1cls}}" aria-label="Gap 1" value="{{ g1 }}" onChange="{{ setG1 }}" placeholder="?"></label>
+                <span>students;</span></span></div>
+              <div style="display: flex; gap: 18px; padding: 0 18px;"><span style="color: #7380A6; width: 18px; text-align: right;">3</span><span></span></div>
+              <div style="display: flex; gap: 18px; padding: 0 18px;"><span style="color: #7380A6; width: 18px; text-align: right;">4</span><span style="color: #8FA3D1;">-- ② Read the table as it was at version 1</span></div>
+              <div style="display: flex; gap: 18px; padding: 0 18px; align-items: center;"><span style="color: #7380A6; width: 18px; text-align: right;">5</span><span style="display: flex; align-items: center; gap: 8px; white-space: nowrap;"><span style="color: #8DB4FF; font-weight: 600;">SELECT</span> * <span style="color: #8DB4FF; font-weight: 600;">FROM</span> students <span style="color: #8DB4FF; font-weight: 600;">VERSION AS</span>
+                <label style="display: inline-flex; align-items: center; gap: 4px;"><span style="font-size: 12px; color: #FFD08A; font-weight: 600;">②</span><input class="gap {{g2cls}}" aria-label="Gap 2" value="{{ g2 }}" onChange="{{ setG2 }}" placeholder="?"></label>
+                <span style="color: #FFB86B;">1</span>;</span></div>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center; padding: 12px 16px; border-top: 1px solid #263155;">
+              <button class="run" onClick="{{ run }}">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="#FFFFFF" aria-hidden="true"><path d="M7 4l13 8-13 8z"></path></svg>
+                Run
+              </button>
+              <span style="font-size: 13px; color: #AEB8D6;">Tip: press Run as often as you like. Nothing breaks.</span>
+            </div>
+          </div>
+
+          <div role="log" aria-label="Terminal output" style="border-radius: 16px; background: #0E1426; color: #D5DCF0; font-family: 'JetBrains Mono', monospace; font-size: 13px; line-height: 1.7; padding: 14px 18px; min-height: 120px; overflow-x: auto;">
+            <div style="color: #7380A6; margin-bottom: 6px;">Terminal</div>
+            <sc-if value="{{ out.idle }}" hint-placeholder-val="{{ false }}"><div style="color: #8FA3D1;">Press Run to see what your code does.</div></sc-if>
+            <sc-if value="{{ out.error }}" hint-placeholder-val="{{ false }}"><div style="color: #FF9B9B;">Error: line {{ errLine }} is not complete yet. Look at gap {{ errGap }}.</div></sc-if>
+            <sc-if value="{{ out.ok }}" hint-placeholder-val="{{ true }}">
+              <div class="rise">
+                <div style="color: #7EE2B0;">› DESCRIBE HISTORY students</div>
+                <div style="white-space: pre; color: #D5DCF0;">version  timestamp          operation
+3        2026-11-05 10:42   DELETE
+2        2026-11-05 10:31   WRITE
+1        2026-11-05 10:20   WRITE
+0        2026-11-05 10:12   CREATE TABLE</div>
+                <div style="color: #7EE2B0; margin-top: 8px;">› SELECT * FROM students VERSION AS OF 1</div>
+                <div style="white-space: pre;">id  name     course
+1   Amina    Data 101
+2   Bao      Data 101
+3   Carlos   SQL 201</div>
+                <div style="color: #8FA3D1;">3 rows · 0.4 s</div>
+              </div>
+            </sc-if>
+          </div>
+
+          <sc-if value="{{ notPassed }}" hint-placeholder-val="{{ true }}">
+            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 14px;">
+              <button class="btn" onClick="{{ check }}">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg>
+                Check my answer
+              </button>
+              <sc-if value="{{ hasWrong }}" hint-placeholder-val="{{ false }}">
+                <span style="font-size: 14px; color: #B42318; display: flex; align-items: center; gap: 8px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v5"></path><path d="M12 16h.01"></path></svg>Almost. Gap {{ errGap }} needs another look.</span>
+              </sc-if>
+              <sc-if value="{{ noWrong }}" hint-placeholder-val="{{ true }}">
+                <span style="font-size: 14px; color: #5B6577;">Stuck? Open “The idea” again, or show the solution.</span>
+              </sc-if>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ passed }}" hint-placeholder-val="{{ false }}">
+            <div class="rise" style="display: flex; align-items: center; gap: 16px; padding: 16px 18px; border-radius: 18px; background: #E9F6EF; border: 1px solid #BFE5D0;">
+              <span class="pop" style="width: 48px; height: 48px; flex-shrink: 0; border-radius: 99px; background: #2F9E6B; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 6px rgba(47,158,107,.18);"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></span>
+              <div style="display: flex; flex-direction: column; gap: 2px;">
+                <span style="font-weight: 600; font-size: 17px; color: #1B5E3F;">Correct! You just used time travel.</span>
+                <span style="font-size: 14px; color: #23784F;">Step 4 is now open. One quick exam question first.</span>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+
+        <sc-if value="{{ passed }}" hint-placeholder-val="{{ false }}">
+          <div class="rise" style="background: #FFFFFF; border: 1px solid #E2E6EE; border-radius: 24px; padding: 24px; display: flex; flex-direction: column; gap: 14px;">
+            <span style="font-size: 13px; font-weight: 600; color: #2F4AC0; text-transform: uppercase; letter-spacing: 0.8px;">Exam check · 1 question</span>
+            <p style="margin: 0; font-size: 17px; line-height: 1.55; font-weight: 500;">A data engineer deleted rows by mistake. The table was correct at version 2. Which command puts the table back to version 2?</p>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+              <sc-for list="{{ opts }}" as="o" hint-placeholder-count="4">
+                <button class="opt {{o.cls}}" onClick="{{ o.pick }}">
+                  <span style="width: 30px; height: 30px; flex-shrink: 0; border-radius: 9px; background: #F0F2F6; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px;">{{o.key}}</span>
+                  <code style="font-family: 'JetBrains Mono', monospace; font-size: 14px;">{{o.text}}</code>
+                </button>
+              </sc-for>
+            </div>
+            <sc-if value="{{ answered }}" hint-placeholder-val="{{ false }}">
+              <div class="rise" style="display: flex; flex-direction: column; gap: 14px;">
+                <p style="margin: 0; padding: 14px 16px; border-radius: 14px; background: #F4F6FA; font-size: 15px; line-height: 1.6;"><strong>{{ verdict }}</strong> <code style="font-family: 'JetBrains Mono', monospace;">RESTORE TABLE … TO VERSION AS OF</code> changes the table back. <code style="font-family: 'JetBrains Mono', monospace;">SELECT … VERSION AS OF</code> only reads the old version; it does not change anything.</p>
+                <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center;">
+                  <a class="btn green" href="Labs.dc.html">Next: Step 4, Clean up
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>
+                  </a>
+                  <span style="font-size: 14px; color: #5B6577;">Lab 2 progress: 3 of 5 steps</span>
+                </div>
+              </div>
+            </sc-if>
+          </div>
+        </sc-if>
+      </section>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"stage":{"editor":"enum","options":["working","passed"],"default":"working"},"$preview":{"width":1440,"height":1320}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    const passed = (props.stage ?? 'working') === 'passed';
+    this.state = { tab: 'idea', g1: 'HISTORY', g2: passed ? 'OF' : '', ran: true, checked: false, passed: passed, solution: false, pick: null };
+  }
+  renderVals() {
+    const s = this.state;
+    const ok1 = s.g1.trim().toUpperCase() === 'HISTORY';
+    const ok2 = s.g2.trim().toUpperCase() === 'OF';
+    const errGap = !ok1 ? 1 : (!ok2 ? 2 : 0);
+    const ranOk = s.ran && ok1 && ok2;
+    const ranErr = s.ran && !(ok1 && ok2);
+    const outIdle = !s.ran;
+    const showGapState = s.checked || s.passed;
+    const options = [
+      { key: 'A', text: 'SELECT * FROM t VERSION AS OF 2' },
+      { key: 'B', text: 'RESTORE TABLE t TO VERSION AS OF 2' },
+      { key: 'C', text: 'DESCRIBE HISTORY t VERSION 2' },
+      { key: 'D', text: 'ROLLBACK TABLE t TO 2' }
+    ];
+    const opts = options.map((o) => {
+      let cls = '';
+      if (s.pick) {
+        if (o.key === 'B') cls = 'right';
+        else if (o.key === s.pick) cls = 'wrong';
+      }
+      return { ...o, cls, pick: () => this.setState({ pick: o.key }) };
+    });
+    const tabFor = (k) => (s.tab === k ? 'on' : '');
+    return {
+      tabs: { idea: tabFor('idea'), words: tabFor('words'), slides: tabFor('slides') },
+      show: { idea: s.tab === 'idea', words: s.tab === 'words', slides: s.tab === 'slides' },
+      tIdea: () => this.setState({ tab: 'idea' }),
+      tWords: () => this.setState({ tab: 'words' }),
+      tSlides: () => this.setState({ tab: 'slides' }),
+      g1: s.g1, g2: s.g2,
+      g1cls: showGapState ? (ok1 ? 'ok' : 'bad') : '',
+      g2cls: showGapState ? (ok2 ? 'ok' : 'bad') : '',
+      setG1: (e) => this.setState({ g1: e.target.value, checked: false }),
+      setG2: (e) => this.setState({ g2: e.target.value, checked: false }),
+      run: () => this.setState({ ran: true }),
+      out: { idle: outIdle, error: ranErr, ok: ranOk },
+      errLine: errGap === 1 ? 2 : 5,
+      errGap: errGap,
+      check: () => this.setState({ checked: true, ran: true, passed: ok1 && ok2 }),
+      hasWrong: s.checked && !s.passed && errGap > 0,
+      noWrong: !(s.checked && !s.passed && errGap > 0),
+      passed: s.passed,
+      notPassed: !s.passed,
+      toggleSolution: () => this.setState(s.solution ? { solution: false } : { solution: true, g1: 'HISTORY', g2: 'OF' }),
+      solutionLabel: s.solution ? 'Hide solution' : 'Show solution',
+      opts,
+      answered: !!s.pick,
+      verdict: s.pick === 'B' ? 'Yes, B is right.' : 'The answer is B.'
+    };
+  }
+}
+</script>
+</body>
+</html>

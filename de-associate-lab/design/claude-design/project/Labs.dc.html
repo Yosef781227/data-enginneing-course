@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>DE Lab: Labs</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#F4F6FA}
+a{color:#2F4AC0}a:hover{color:#1F3594}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:46px;padding:0 20px;border-radius:14px;background:#3B5BDB;color:#FFFFFF;font-weight:600;font-size:15px;text-decoration:none;box-shadow:0 2px 0 #2B44A8}
+.btn:hover{background:#2F4AC0;color:#FFFFFF}
+.ghost{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:12px;background:#FFFFFF;border:1px solid #D7DCE6;color:#1C2433;font-weight:500;font-size:14px;text-decoration:none}
+.ghost:hover{background:#F0F3F9;color:#1C2433}
+.fill{transform-origin:left;animation:grow .9s cubic-bezier(.2,.8,.2,1) both}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+</style>
+</helmet>
+<div style="min-height: 100vh; display: flex; flex-wrap: wrap; background: #F4F6FA; font-family: Lexend, system-ui, sans-serif; color: #1C2433;">
+  <div style="flex: 1 1 248px; background: #FFFFFF; border-right: 1px solid #E2E6EE;">
+    <dc-import name="Sidebar" active="labs" hint-size="248px,760px"></dc-import>
+  </div>
+
+  <main style="flex: 999 1 560px; min-width: 0; padding: 40px 40px 64px; box-sizing: border-box;">
+    <div style="max-width: 880px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px;">
+      <header style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 20px;">
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <h1 style="margin: 0; font-size: 32px; font-weight: 600; letter-spacing: -0.6px;">Labs</h1>
+          <p style="margin: 0; font-size: 16px; color: #3D4657; line-height: 1.5;">9 labs, one for each exam topic. Do them in order. Each one builds on the last.</p>
+        </div>
+        <div style="min-width: 220px; display: flex; flex-direction: column; gap: 8px;">
+          <span style="font-size: 14px; color: #3D4657;"><strong style="color: #1C2433;">6 of 40</strong> steps done</span>
+          <div style="height: 10px; border-radius: 99px; background: #E2E6EE; overflow: hidden;"><div class="fill" style="width: 15%; height: 10px; border-radius: 99px; background: #2F9E6B;"></div></div>
+        </div>
+      </header>
+
+      <ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0;">
+        <li style="display: flex; gap: 20px;">
+          <div aria-hidden="true" style="display: flex; flex-direction: column; align-items: center; width: 44px; flex-shrink: 0;">
+            <span style="width: 44px; height: 44px; border-radius: 99px; background: #2F9E6B; display: flex; align-items: center; justify-content: center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"></path></svg></span>
+            <span style="flex-grow: 1; width: 4px; background: #2F9E6B; border-radius: 4px; min-height: 20px;"></span>
+          </div>
+          <div style="flex-grow: 1; margin-bottom: 16px; background: #FFFFFF; border: 1px solid #E2E6EE; border-radius: 20px; padding: 18px 22px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px;">
+            <div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-size: 12px; font-weight: 600; color: #23784F; letter-spacing: 0.6px;">LAB 1 · DONE</span>
+              <span style="font-size: 18px; font-weight: 600;">The Lakehouse</span>
+              <span style="font-size: 14px; color: #5B6577;">One home for all your data: lake + warehouse together</span>
+            </div>
+            <span style="font-size: 14px; color: #23784F; font-weight: 500;">4/4 steps</span>
+            <a class="ghost" href="LabStep.dc.html">Review</a>
+          </div>
+        </li>
+
+        <li style="display: flex; gap: 20px;">
+          <div aria-hidden="true" style="display: flex; flex-direction: column; align-items: center; width: 44px; flex-shrink: 0;">
+            <span style="width: 44px; height: 44px; border-radius: 99px; background: #FFFFFF; border: 4px solid #3B5BDB; box-sizing: border-box; color: #2F4AC0; font-weight: 700; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 6px #E2E9FF;">2</span>
+            <span style="flex-grow: 1; width: 4px; background: #D7DCE6; border-radius: 4px; min-height: 20px;"></span>
+          </div>
+          <div style="flex-grow: 1; margin-bottom: 16px; background: #FFFFFF; border: 2px solid #3B5BDB; border-radius: 22px; padding: 22px; display: flex; flex-direction: column; gap: 16px; box-shadow: 0 10px 28px rgba(59,91,219,0.12);">
+            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px;">
+              <div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 4px;">
+                <span style="font-size: 12px; font-weight: 600; color: #2F4AC0; letter-spacing: 0.6px;">LAB 2 · YOU ARE HERE</span>
+                <span style="font-size: 20px; font-weight: 600;">Delta Lake</span>
+                <span style="font-size: 14px; color: #5B6577;">A table that remembers every change</span>
+              </div>
+              <a class="btn" href="LabStep.dc.html">Continue step 3</a>
+            </div>
+            <ol style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px;">
+              <li style="display: flex; align-items: center; gap: 8px; padding: 10px 12px; border-radius: 12px; background: #E9F6EF; font-size: 14px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#23784F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-label="Done" role="img"><path d="M5 12l5 5 9-10"></path></svg>1. Make a table</li>
+              <li style="display: flex; align-items: center; gap: 8px; padding: 10px 12px; border-radius: 12px; background: #E9F6EF; font-size: 14px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#23784F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-label="Done" role="img"><path d="M5 12l5 5 9-10"></path></svg>2. Change rows</li>
+              <li style="display: flex; align-items: center; gap: 8px; padding: 10px 12px; border-radius: 12px; background: #EAEFFF; font-size: 14px; font-weight: 600; color: #2F4AC0;"><span style="width: 10px; height: 10px; border-radius: 99px; background: #3B5BDB;"></span>3. Go back in time</li>
+              <li style="display: flex; align-items: center; gap: 8px; padding: 10px 12px; border-radius: 12px; background: #F4F6FA; font-size: 14px; color: #5B6577;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5B6577" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-label="Locked" role="img"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>4. Clean up</li>
+              <li style="display: flex; align-items: center; gap: 8px; padding: 10px 12px; border-radius: 12px; background: #F4F6FA; font-size: 14px; color: #5B6577;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5B6577" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-label="Locked" role="img"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>5. Undo a mistake</li>
+            </ol>
+          </div>
+        </li>
+
+        <sc-for list="{{ later }}" as="lab" hint-placeholder-count="7">
+          <li style="display: flex; gap: 20px;">
+            <div aria-hidden="true" style="display: flex; flex-direction: column; align-items: center; width: 44px; flex-shrink: 0;">
+              <span style="width: 44px; height: 44px; border-radius: 99px; background: #F0F2F6; border: 2px solid #D7DCE6; box-sizing: border-box; color: #5B6577; font-weight: 600; display: flex; align-items: center; justify-content: center;">{{lab.n}}</span>
+              <span style="flex-grow: 1; width: 4px; background: #D7DCE6; border-radius: 4px; min-height: 20px; opacity: {{lab.lineOpacity}};"></span>
+            </div>
+            <div style="flex-grow: 1; margin-bottom: 16px; background: #FFFFFF; border: 1px solid #E2E6EE; border-radius: 20px; padding: 18px 22px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px;">
+              <div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 4px;">
+                <span style="font-size: 12px; font-weight: 600; color: #5B6577; letter-spacing: 0.6px;">LAB {{lab.n}} · {{lab.section}}</span>
+                <span style="font-size: 18px; font-weight: 600;">{{lab.title}}</span>
+                <span style="font-size: 14px; color: #5B6577;">{{lab.sub}}</span>
+              </div>
+              <span style="font-size: 14px; color: #5B6577;">{{lab.steps}} steps · ~{{lab.mins}} min</span>
+              <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: #5B6577;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5B6577" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>Opens after Lab {{lab.prev}}</span>
+            </div>
+          </li>
+        </sc-for>
+      </ol>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1180}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const rows = [
+      ['3', 'SPARK SQL', 'Spark SQL basics', 'Asking questions of your data', 5, 30],
+      ['4', 'PYTHON', 'Python & DataFrames', 'A spreadsheet you control with code', 4, 25],
+      ['5', 'INGESTION', 'Auto Loader', 'A mailbox that picks up new files for you', 5, 30],
+      ['6', 'INCREMENTAL', 'Structured Streaming', 'A conveyor belt of data that never stops', 4, 25],
+      ['7', 'PIPELINES', 'Medallion & Delta Live Tables', 'Bronze, silver, gold: clean data in layers', 5, 35],
+      ['8', 'PRODUCTION', 'Jobs & Workflows', 'Put your pipeline on autopilot', 4, 25],
+      ['9', 'GOVERNANCE', 'Unity Catalog', 'Keys and locks: who can see which data', 4, 25]
+    ];
+    const later = rows.map((r, i) => ({ n: r[0], section: r[1], title: r[2], sub: r[3], steps: r[4], mins: r[5], prev: Number(r[0]) - 1, lineOpacity: i === rows.length - 1 ? 0 : 1 }));
+    return { later };
+  }
+}
+</script>
+</body>
+</html>
